@@ -21,6 +21,7 @@ public class UserController {
         this.userService = userService;
     }
 
+    // api for user signup
     @PostMapping("/signup")
     public ResponseEntity<UserResponse> userSignUp(@RequestBody UserRequest userRequest) throws UserAlreadyExistException {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.addUser(userRequest));
