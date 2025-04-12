@@ -1,15 +1,18 @@
 package com.apex.userManagement.controller;
 
-import com.apex.userManagement.entity.User;
+import com.apex.userManagement.dto.UserRequest;
+import com.apex.userManagement.dto.UserResponse;
 import com.apex.userManagement.exception.UserAlreadyExistException;
 import com.apex.userManagement.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/api/v1")
 public class UserController {
 
     private final UserService userService;
@@ -19,8 +22,8 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<String> userSignUp(@RequestBody User user) throws UserAlreadyExistException {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.addUser(user));
+    public ResponseEntity<UserResponse> userSignUp(@RequestBody UserRequest userRequest) throws UserAlreadyExistException {
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.addUser(userRequest));
     }
 
 }
